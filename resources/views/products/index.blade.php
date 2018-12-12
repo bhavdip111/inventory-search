@@ -32,7 +32,7 @@
                             </div>
                             <div class="col-md-3">
                                 <select class="form-control" name="search_on">
-                                    <option value=""> {{ __('Select') }}</option>
+                                    <option value=""> {{ __('Sort By') }}</option>
                                     <option value="price"> {{ __('Price') }}</option>
                                     <option value="quantity"> {{ __('Quantity') }}</option>
                                 </select>
@@ -60,7 +60,7 @@
 
             <br/>
             <div id="records">
-                @include('products.list_product')
+                
             </div>
         </div>
     </div>
@@ -69,8 +69,5 @@
 
 @section('js')
     <script src="{{ asset('js/general.js') }}"></script>
-    <script type="text/javascript">
-        
-    </script>
 @endsection
 

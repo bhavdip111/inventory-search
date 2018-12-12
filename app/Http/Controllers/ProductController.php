@@ -28,7 +28,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::paginate(Config::get('app.default_paginate'));
-        return view('products.index', compact('products'));
+        return view('products.index');
     }
 
     /**
@@ -156,6 +156,8 @@ class ProductController extends Controller
             $orderBy = ($request->order_by != "" && in_array(strtolower($request->order_by), ["asc", "desc"])) ? $request->order_by : "asc";
             $searchOn = ($request->search_on != "" && in_array(strtolower($request->search_on), ["price", "quantity"])) ? $request->search_on : "id";
             $searchText = ($request->search != "") ? e($request->search) : "";
+            $page = ($request->page != "") ? $request->page : 1;
+            $records = ($request->records != "") ? $request->records : 0;
 
             $productsData = Product::orderBy($searchOn, $orderBy);
 
@@ -173,11 +175,4 @@ class ProductController extends Controller
             return response()->json(["result" => false, "status" => $e->getCode(), "message" => app('translator')->getFromJson('Something went wrong.')]);
         }
     }
-
-    public function reset()
-    {
-        $products = Product::paginate(Config::get('app.default_paginate'));
-        return view('products.list_product', compact('products'));
-    }
-
 }

@@ -4,7 +4,6 @@
             <th scope="col">{{ __('Title') }} </th>
             <th scope="col">{{ __('Price') }} </th>
             <th scope="col">{{ __('Quantity') }} </th>
-            <th scope="col">{{ __('SKU') }} </th>
             <th scope="col">{{ __('Content') }} </th>
             <th scope="col">{{ __('Action') }} </th>
         </tr>
@@ -15,7 +14,6 @@
                 <td> {{ $product->title }} </td>
                 <td> {{ $product->price }} </td>
                 <td> {{ $product->quantity }} </td>
-                <td> {{ $product->product_sku }} </td>
                 <td> {!! str_limit($product->content, 30, " &raquo") !!}  </td>
                 <td> 
                     <a href="{{ route('products.edit', Crypt::encrypt($product->id)) }}">Edit</a> &nbsp; | &nbsp;
@@ -24,7 +22,7 @@
             </tr>
         @empty
             <tr>
-                <td colspan="6">{{ __('No any product found.') }}</td>
+                <td colspan="5">{{ __('No any product found.') }}</td>
             </tr>
         @endforelse
     </tbody>

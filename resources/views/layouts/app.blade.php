@@ -6,13 +6,16 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name='sort' content='desc'>
+    <meta name='sort_column' content='id'>
+    <meta name='record_per_page' content="{{ config('app.default_paginate') }}">
+    <meta name='search_url' content="{{ url('products/search-product') }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/jquery-3.2.1.slim.min.js') }}"></script>
-    <!-- <script src="{{ asset('js/bootstrap.min.js') }}"></script> -->
     
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

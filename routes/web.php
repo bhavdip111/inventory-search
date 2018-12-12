@@ -21,7 +21,6 @@ Route::get('/home', 'ProductController@index')->name('home');
 
 Route::group([ 'middleware' => ['auth']], function () {
 	Route::post('products/search-product', 'ProductController@search');
-	Route::get('products/reset', 'ProductController@reset');
 	Route::resource('products', 'ProductController');
 });
 
