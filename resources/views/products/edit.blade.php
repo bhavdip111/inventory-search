@@ -39,7 +39,7 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Update') }}
                                 </button>
-                                <button type="reset" class="btn btn-defaullt">
+                                <button type="reset" class="btn btn-default">
                                     {{ __('Reset') }}
                                 </button>
                             </div>

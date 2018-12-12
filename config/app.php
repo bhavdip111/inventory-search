@@ -56,7 +56,9 @@ return [
 
     'asset_url' => env('ASSET_URL', null),
 
-    'default_paginate' => env('DEFAULT_PAGINATE', 15),
+    'default_paginate' => env('DEFAULT_PAGINATE', 10),
+
+    'default_sku_length' => env('DEFAULT_SKU_LENGHT', 8),
 
     /*
     |--------------------------------------------------------------------------

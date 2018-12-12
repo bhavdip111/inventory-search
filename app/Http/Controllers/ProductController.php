@@ -27,7 +27,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(15);
+        $products = Product::paginate(Config::get('app.default_paginate'));
         return view('products.index', compact('products'));
     }
 
@@ -56,7 +56,7 @@ class ProductController extends Controller
             $data = [];
             $data = $request->all();
             $data['created_by'] = Auth::id();
-            $data['sku'] = CommonHelper::generateRandomNo(8);
+            $data['sku'] = CommonHelper::generateRandomNo(Config::get('app.default_sku_length'));
 
             //Required validation checked and let's save new product records.
             $product->fill($data)->save();
@@ -153,12 +153,31 @@ class ProductController extends Controller
     public function search(Request $request)
     {
         try {
-            $products = Product::paginate(15);
+            $orderBy = ($request->order_by != "" && in_array(strtolower($request->order_by), ["asc", "desc"])) ? $request->order_by : "asc";
+            $searchOn = ($request->search_on != "" && in_array(strtolower($request->search_on), ["price", "quantity"])) ? $request->search_on : "id";
+            $searchText = ($request->search != "") ? e($request->search) : "";
+
+            $productsData = Product::orderBy($searchOn, $orderBy);
+
+            if($searchText != "") {
+                $productsData->where('title','LIKE','%'.$searchText."%")->orWhere('content','LIKE','%'.$searchText."%");
+            }
+
+            $products = $productsData->paginate(Config::get('app.default_paginate'));
+
             return view('products.list_product', compact('products'));
+        
         } catch (Exception $e) {
             //Save error into the log
             Log::error($e);
             return response()->json(["result" => false, "status" => $e->getCode(), "message" => app('translator')->getFromJson('Something went wrong.')]);
         }
     }
+
+    public function reset()
+    {
+        $products = Product::paginate(Config::get('app.default_paginate'));
+        return view('products.list_product', compact('products'));
+    }
+
 }

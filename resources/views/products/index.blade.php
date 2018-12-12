@@ -24,7 +24,7 @@
                     <a class="btn btn-primary float-right btn-sm" href="{{ route('products.create') }}" title="{{ __('Create Product') }}">{{ __('Create Product') }}</a>
                 </div>
                 <div class="card-body">
-                    <form method="POST" id="search_product">
+                    <form method="POST" id="search_product" data-action="{{ url('products/search-product') }}">
                         @csrf
                         <div class="form-group row">
                             <div class="col-md-3">
@@ -48,7 +48,7 @@
                                 <button type="submit" class="btn btn-primary" >
                                     {{ __('Search') }}
                                 </button>
-                                <button type="reset" class="btn btn-defaullt">
+                                <button type="reset" class="btn btn-defaullt" id="resetButton">
                                     {{ __('Reset') }}
                                 </button>
                             </div>
@@ -68,27 +68,9 @@
 @endsection
 
 @section('js')
-    <script src="{{ asset('js/delete.js') }}"></script>
+    <script src="{{ asset('js/general.js') }}"></script>
     <script type="text/javascript">
-        $(document).on("submit","#search_product", function(e) {
-            e.preventDefault();
-            var form_data = $("#search_product").serialize();
-            console.log(form_data);
-
-            $.ajax({
-                method: 'POST',
-                data: form_data,
-                url: '{{ url("products/search-product") }}',
-                headers: { 
-                    'X-CSRF-TOKEN': "{{ csrf_token() }} "
-                },         
-                success: function (response)
-                {
-                    $("#records").html(response);
-                    console.log(response);
-                }
-            });
-        });
+        
     </script>
 @endsection
 

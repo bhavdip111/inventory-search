@@ -17,10 +17,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'ProductController@index')->name('home');
 
 Route::group([ 'middleware' => ['auth']], function () {
 	Route::post('products/search-product', 'ProductController@search');
+	Route::get('products/reset', 'ProductController@reset');
 	Route::resource('products', 'ProductController');
 });
 

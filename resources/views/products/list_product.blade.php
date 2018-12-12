@@ -24,12 +24,10 @@
             </tr>
         @empty
             <tr>
-                <td colspan="6">@mdo</td>
+                <td colspan="6">{{ __('No any product found.') }}</td>
             </tr>
         @endforelse
     </tbody>
 </table>
-
-
 
 {!! $products->render() !!}
